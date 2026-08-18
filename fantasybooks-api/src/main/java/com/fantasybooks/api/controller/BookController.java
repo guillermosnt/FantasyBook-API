@@ -1,15 +1,27 @@
 package com.fantasybooks.api.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fantasybooks.api.model.Book;
+import com.fantasybooks.api.service.BookService;
+
+
 
 @RestController
 public class BookController {
 
-    @GetMapping("/api/books")
-    public String getBooks() {
-        return "Aquí se encuentran los libros de fantasía";
+    public final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
-    
+
+    @GetMapping("/api/books")
+    public List<Book> getBooks() {
+        return bookService.getBooks();
+    }
 
 }
